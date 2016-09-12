@@ -1,0 +1,41 @@
+@import "../variables";
+
+.MenuBar {
+  background: white;
+  border-bottom: 1px solid $green;
+  height: 64px;
+  text-align: left;
+  position: relative;
+
+  &__img {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    img {
+      width: 202px;
+    }
+  }
+
+  &__user {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+
+    .MenuBar__email {
+      margin-right: 16px;
+    }
+
+    a {
+      color: $green;
+      text-decoration: none;
+
+      &:hover {
+        color: lighten($green, 10%);
+      }
+    }
+  }
+}

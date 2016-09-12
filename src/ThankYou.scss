@@ -1,0 +1,31 @@
+@import './variables';
+
+.ThankYou {
+  padding-top: 64px;
+  background: $cream;
+
+  &__content {
+    max-width: 610px;
+    line-height: 28px;
+    padding: 0 0 100px;
+    margin: 0 auto;
+    text-align: center;
+
+    img {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__title {
+    font-family: 'Amatic SC',lato,helvetica,arial,sans-serif;
+    font-weight: normal;
+    font-size: 144px;
+    line-height: 144px;
+    margin-bottom: 32px;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}

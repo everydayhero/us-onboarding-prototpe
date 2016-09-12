@@ -1,0 +1,99 @@
+@import './variables';
+
+.SignUp {
+  background-image: url("./alt_charity_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding-top: 4px;
+  padding-top: 4px;
+  height: 100%;
+}
+
+.SignUpForm {
+  box-sizing: border-box;
+  max-width: 648px;
+  margin: 144px auto 80px auto;
+  padding: 20px 0 40px;
+  background-image: url("./alt_charity_bg--blur.jpg");
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+  background-attachment: fixed;
+  border-radius: 2px;
+
+  &__fields {
+    padding: 32px 144px 0;
+  }
+
+  &__title {
+    font-family: "Amatic SC", "amatic", lato, helvetica, arial, sans-serif;
+    font-size: 36px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  &__icon {
+    font-size: 44px;
+    color: white;
+    margin-bottom: 12px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  hr {
+    background: #fff;
+    border-color: transparent;
+    opacity: 0.25;
+  }
+
+  a {
+    color: $green;
+
+    &:hover {
+      color: lighten($green, 3%);
+    }
+  }
+
+  .hui-Checkbox {
+    text-align: left;
+
+    &__label {
+      display: inline;
+    }
+  }
+}
+
+.Quote {
+  font-size: 28px;
+  max-width: 720px;
+  line-height: 36px;
+  font-weight: 200;
+  margin: 0 auto;
+  color: #f2f2f2;
+  padding: 0px 130px 125px 130px;
+  text-align: center;
+
+  &__owner {
+    font-family: 'Amatic SC',lato,helvetica,arial,sans-serif;
+    height: 52px;
+    line-height: 52px;
+    margin-top: 20px;
+    font-size: 20px;
+    display: inline-block;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-size: 30px;
+    vertical-align: middle;
+    margin: 12px;
+  }
+}

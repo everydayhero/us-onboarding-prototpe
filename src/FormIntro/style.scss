@@ -1,0 +1,14 @@
+@import "../variables";
+
+.FormIntro {
+  font-size: 16px;
+  color: $smoke;
+  padding-bottom: 36px;
+  line-height: 1.45;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 200;
+    color: $charcoal;
+  }
+}

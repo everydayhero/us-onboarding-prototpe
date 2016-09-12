@@ -1,0 +1,24 @@
+@import "variables";
+
+body {
+  font-family: "lato", sans-serif;
+  background: #fff;
+  color: $charcoal;
+  font-size: 13px;
+  letter-spacing: 0.65px;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $lightGreen;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($lightGreen, 3%);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

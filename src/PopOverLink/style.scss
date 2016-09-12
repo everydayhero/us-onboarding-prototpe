@@ -1,0 +1,66 @@
+@import '../variables';
+
+.PopOverLink {
+  position: relative;
+  display: inline-block;
+
+  &__text {
+    display: inline-block;
+    border-bottom: 1px dotted $charcoal;
+    cursor: help;
+  }
+
+  &:hover &__content {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: -245px;
+    left: -50%;
+    transform: translateX(25px);
+    background: #fff;
+    border-radius: 2px;
+    padding: 15px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 1px 5px 2px rgba($charcoal, 0.15);
+    z-index: 5;
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      position: relative;
+    }
+
+    &:before {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #fff;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -5px;
+      z-index: 2;
+    }
+
+    &:after {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #dfdfdf;
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      margin-left: -5px;
+      z-index: 1;
+    }
+  }
+}

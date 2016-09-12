@@ -1,0 +1,104 @@
+@import '../variables';
+
+@keyframes animateIconIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px)
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.SearchResult {
+  display: none;
+  font-size: 15px;
+
+  &__heading {
+    font-size: 18px;
+    font-weight: 200;
+  }
+
+  &__content {
+    display: inline-block;
+    padding-left: 16px;
+  }
+
+  &__icon {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background: $green;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 16px;
+    color: #fff;
+    text-align: center;
+    font-size: 32px;
+
+    > span {
+      transition: all 400ms $bounce 100ms;
+      display: block;
+      transform: translateY(11px)
+    }
+  }
+
+  &__org {
+    display: inline-block;
+    margin-top: 16px;
+  }
+
+  &__orgName {
+    font-weight: bold;
+  }
+}
+
+.SearchResult--loading {
+  display: block;
+
+  .SearchResult__icon {
+    background: #ddd;
+
+    > span {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+  }
+
+  .SearchResult__heading {
+    color: transparent;
+    background: #ddd;
+    border-radius: 12px;
+  }
+
+  .SearchResult__org {
+    color: transparent;
+    position: relative;
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      width: 88%;
+      height: 12px;
+      background: #ddd;
+      border-radius: 12px;
+    }
+
+    &:after {
+      width: 76%;
+      top: 20px;
+    }
+  }
+}
+
+.SearchResult--visible {
+  display: block;
+
+  &__icon {
+    animation: animateIconIn 300ms $bounce;
+  }
+}
