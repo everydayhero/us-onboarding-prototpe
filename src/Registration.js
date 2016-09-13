@@ -1,6 +1,6 @@
 import React from 'react'
 import { delay } from 'lodash'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import classNames from 'classnames'
 import './Registration.scss'
 
@@ -91,7 +91,7 @@ export default React.createClass({
   },
 
   simulateSendForm() {
-    browserHistory.push(`/thankyou?email=${this.props.location.query.email}`)
+    hashHistory.push(`/thankyou?email=${this.props.location.query.email}`)
   },
 
   simulateUploaded() {
@@ -170,8 +170,8 @@ export default React.createClass({
             layout="half"
             label="Organization Name"
             onChange={ (text) => this.handleInputChange('displayName', text) }
-            value={ this.state.displayName }
-            errorMessage="This field is required. Hint: An EIN is also known as a Federal Tax Identification number."
+            value={ this.state.orgName }
+            errorMessage="Hint: ..."
             required
             showError />
         </FormRow> }

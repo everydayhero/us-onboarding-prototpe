@@ -4,7 +4,7 @@ import Checkbox from 'hero-ui/forms/Checkbox'
 import Button from 'hero-ui/buttons/Button'
 import Icon from 'hero-ui/atoms/Icon'
 
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import './SignUp.scss'
 import QuoteIcon from './quote_icon.png'
@@ -31,7 +31,7 @@ export default React.createClass({
 
   simulateSignUp(e = null) {
     if (e) e.preventDefault()
-    browserHistory.push(`/registration?email=${this.state.email}`)
+    hashHistory.push(`/registration?email=${this.state.email}`)
   },
 
   render() {
