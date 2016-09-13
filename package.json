@@ -1,6 +1,7 @@
 {
   "name": "us-onboarding-form",
   "version": "0.1.0",
+  "homepage": "https://everydayhero.github.io/us-onboarding-prototpe/",
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.4.0",
