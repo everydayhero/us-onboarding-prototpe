@@ -1,12 +1,11 @@
 import React from 'react'
-import check from '../check.png'
 import './style.scss'
 
-export default () => (
+export default ({ text, children }) => (
   <div className="PopOverLink">
     <div className="PopOverLink__content">
-      <img src={ check } alt="voided check" />
+      { children }
     </div>
-    <span className="PopOverLink__text">View an example voided check.</span>
+    <span className="PopOverLink__text">{ text }</span>
   </div>
 )

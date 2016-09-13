@@ -3,6 +3,7 @@ import { delay } from 'lodash'
 import { hashHistory } from 'react-router'
 import classNames from 'classnames'
 import './Registration.scss'
+import check from './check.png'
 
 // hero-ui SASS
 import 'hero-ui/assets.scss'
@@ -13,9 +14,10 @@ import Fieldset from 'hero-ui/forms/Fieldset'
 import FormRow from 'hero-ui/forms/FormRow'
 import TextInput from 'hero-ui/forms/TextInput'
 import SearchInput from 'hero-ui/forms/SearchInput'
-import Icon from 'hero-ui/atoms/Icon'
+import Checkbox from 'hero-ui/forms/Checkbox'
 import AddressLookup from 'hero-ui/forms/AddressFieldsetWithLookup'
 import FileInput from 'hero-ui/forms/FileInput'
+import Icon from 'hero-ui/atoms/Icon'
 
 // Other components
 import FormIntro from './FormIntro'
@@ -31,7 +33,9 @@ export default React.createClass({
     return {
       loading: false,
       complete: false,
+      orgName: '',
       notFound: false,
+      samePostal: true,
       einConfirmed: false,
       ein: '',
       einErrors: [],
@@ -41,7 +45,8 @@ export default React.createClass({
       accountNumber: '',
       imageName: '',
       subscription: 'STARTER (FREE)',
-      payment: 'Wire Transfer (ACH) or Check'
+      payment: 'Wire Transfer (ACH) or Check',
+      termsCheckbox: false
     }
   },
 
@@ -57,7 +62,8 @@ export default React.createClass({
     // set state to loading
     this.setState({
       loading: true,
-      complete: false
+      complete: false,
+      notFound: false
     })
 
     // after a few seconds, set it to complete
@@ -66,6 +72,13 @@ export default React.createClass({
         loading: false,
         complete: true
       })
+
+      if (this.state.ein === '000999888') {
+        this.setState({
+          displayName: '',
+          notFound: true
+        })
+      }
     }, 3300)
   },
 
@@ -112,6 +125,14 @@ export default React.createClass({
     })
   },
 
+  handleSamePostalCheckbox() {
+    this.setState({ samePostal: !this.state.samePostal })
+  },
+
+  handleTermsCheckbox() {
+    this.setState({ termsCheckbox: !this.state.termsCheckbox })
+  },
+
   renderPaymentSection() {
     return (
       <Fieldset legend="Payment">
@@ -145,6 +166,46 @@ export default React.createClass({
     )
   },
 
+  renderTermsCheckbox() {
+    const checkboxLabel = <span>I accept the everydayhero <a href="#">online fundraising agreement</a></span>
+
+    return (
+      <Fieldset>
+        <FormRow>
+          <Checkbox
+            className="TermsCheckbox"
+            labelIsClickable={ false }
+            label={ checkboxLabel }
+            value={ this.state.termsCheckbox }
+            onChange={ this.handleTermsCheckbox } />
+        </FormRow>
+      </Fieldset>
+    )
+  },
+
+  renderSendButton() {
+    const {
+      complete,
+      ein,
+      displayName,
+      contactNumber,
+      routingNumber,
+      accountNumber,
+      imageName,
+      termsCheckbox
+    } = this.state
+
+    const enabled = complete && ein && displayName && contactNumber && routingNumber && accountNumber && imageName && termsCheckbox
+
+    return (
+      <Button
+        label="Send Application"
+        kind="cta"
+        onClick={ this.simulateSendForm }
+        disabled={ !enabled } />
+    )
+  },
+
   renderFullForm() {
     const {
       loading,
@@ -161,20 +222,22 @@ export default React.createClass({
     return (
       <form className={ classes }>
         <div className="FullForm__title">
-          Please double check the details below and tell us a little bit more to complete your application.
+          <SearchResult
+            notFound={ this.state.notFound }
+            loading={ this.state.loading }
+            complete={ this.state.complete } />
         </div>
 
         <Fieldset legend="Organization Name">
-        { this.state.notFound && <FormRow tip="This is your legal organization name as registered with the IRS for the EIN provided above. This will be included on donation along with your display name.">
-          <TextInput
-            layout="half"
-            label="Organization Name"
-            onChange={ (text) => this.handleInputChange('displayName', text) }
-            value={ this.state.orgName }
-            errorMessage="Hint: ..."
-            required
-            showError />
-        </FormRow> }
+          { this.state.notFound && <FormRow tip="This is your legal organization name as registered with the IRS for the EIN provided above. This will be included on donation along with your display name.">
+            <TextInput
+              layout="half"
+              label="Organization Name"
+              onChange={ (text) => this.handleInputChange('orgName', text) }
+              value={ this.state.orgName }
+              errorMessage="This field is required. It should match the name your organization has registered with the IRS."
+              required />
+          </FormRow> }
 
           <FormRow tip="The organization display name appears publically on your everydayhero nonprofit profile, campaign pages, donation receipts and in search results. Choose a name that your donors and fundraisers will recognize.">
             <TextInput
@@ -183,8 +246,7 @@ export default React.createClass({
               onChange={ (text) => this.handleInputChange('displayName', text) }
               value={ this.state.displayName }
               errorMessage="This field is required. Hint: An EIN is also known as a Federal Tax Identification number."
-              required
-              showError />
+              required />
           </FormRow>
         </Fieldset>
 
@@ -196,11 +258,34 @@ export default React.createClass({
               hint="Ideally this should be your direct contact number, rather than a general number for you organization."
               onChange={ (text) => this.handleInputChange('contactNumber', text) }
               value={ this.state.contactNumber }
+              errorMessage="This field is required."
               required />
           </FormRow>
         </Fieldset>
 
-        <Fieldset legend="Postal Address">
+        { this.state.notFound && <Fieldset legend="Organization Address">
+          <FormRow tip="We verify that this is your organization's address as registered with the IRS.">
+            <AddressLookup
+              countryCode="us"
+              required
+              errorMessage="This field is required. It should match the address your organization has registered with the IRS." />
+          </FormRow>
+          <FormRow>
+            <Checkbox
+              labelIsClickable={ false }
+              label="This is also the postal address for my organization"
+              value={ this.state.samePostal }
+              onChange={ this.handleSamePostalCheckbox } />
+          </FormRow>
+        </Fieldset> }
+
+        { !this.state.samePostal && <Fieldset legend="Postal Address">
+          <FormRow tip="We use this address only if we need to send your organization physical financial or legal documents relating to your account at everydayhero.">
+            <AddressLookup countryCode="us" />
+          </FormRow>
+        </Fieldset> }
+
+        { !this.state.notFound && <Fieldset legend="Postal Address">
           <FormRow tip="We use this address only if we need to send your organization physical financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
@@ -211,10 +296,9 @@ export default React.createClass({
                 country_name: 'United States',
                 postal_code: '10259'
               }}
-              required
-              showError />
+              required />
           </FormRow>
-        </Fieldset>
+        </Fieldset> }
 
         <Fieldset legend="Bank Account Details">
           <FormRow tip="We use these bank account details to release donations to your nonprofit. Funds are released via bank-to-bank transfer, once a week.">
@@ -224,6 +308,7 @@ export default React.createClass({
             hint="A bank routing number is a nine digit code based on the bank location where your account was opened."
             onChange={ (text) => this.handleInputChange('routingNumber', text) }
             value={ this.state.routingNumber }
+            errorMessage="A routing number is required before donations can be released to your account."
             required />
           </FormRow>
           <FormRow>
@@ -232,6 +317,7 @@ export default React.createClass({
               label="Account Number"
               onChange={ (text) => this.handleInputChange('accountNumber', text) }
               value={ this.state.accountNumber }
+              errorMessage="A bank account number is required before donations can be released to your account."
               required />
             <div className="hui-FormRow__tip">
               <label className="hui-FormRow__label">
@@ -263,7 +349,9 @@ export default React.createClass({
               <label className="hui-FormRow__label">
                 <p>Upload a voided check OR a bank statement (in .pdf, .jpg, .png or .gif format) showing the name of your organization’s account number. We use this to verify that the above bank account is in the name of your organization.</p>
 
-                <PopOverLink />
+                <PopOverLink text="View an example voided check.">
+                  <img src={ check } alt="voided check" />
+                </PopOverLink>
               </label>
             </div>
           </FormRow>
@@ -290,19 +378,15 @@ export default React.createClass({
               <label className="hui-FormRow__label">
                 <p>Every nonprofit is different. Choose the subscription and features that suit your organization best to get started on the right foot.</p>
 
-                <p>Still not sure? No problem, check out a full comparison of Starter vs. Pro to find what’s best for you.</p>
+                <p>Still not sure? No problem, check out a <a href="http://join.everydayhero.com/us/#benefits" target="_blank">full comparison of Starter vs. Pro</a> to find what’s best for you.</p>
               </label>
             </div>
           </FormRow>
         </Fieldset>
 
         { this.state.subscription === 'PRO ($99/mo)' && this.renderPaymentSection() }
-
-        <Button
-          label="Send Application"
-          kind="cta"
-          onClick={ this.simulateSendForm }
-          disabled={ !this.state.complete } />
+        { this.renderTermsCheckbox() }
+        { this.renderSendButton() }
       </form>
     )
   },
@@ -326,12 +410,9 @@ export default React.createClass({
                   onBlur={ (text) => this.handleEINBlur(text) }
                   value={ this.state.ein }
                   errors={ this.state.einErrors }
+                  disabled={ this.state.loading }
                   required />
               </FormRow>
-
-              <SearchResult
-                loading={ this.state.loading }
-                complete={ this.state.complete } />
             </Fieldset>
           </form>
 

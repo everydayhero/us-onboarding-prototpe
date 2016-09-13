@@ -14,15 +14,26 @@
 .SearchResult {
   display: none;
   font-size: 15px;
+  padding: 32px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  border-radius: 2px;
 
   &__heading {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 200;
+  }
+
+  &__subheading {
+    margin-top: 8px;
+  }
+
+  &__orgContainer {
+    margin-top: 24px;
   }
 
   &__content {
     display: inline-block;
-    padding-left: 16px;
   }
 
   &__icon {
@@ -32,7 +43,7 @@
     background: $green;
     display: inline-block;
     vertical-align: top;
-    margin-left: 16px;
+    margin-right: 16px;
     color: #fff;
     text-align: center;
     font-size: 32px;
@@ -46,7 +57,6 @@
 
   &__org {
     display: inline-block;
-    margin-top: 16px;
   }
 
   &__orgName {
@@ -66,13 +76,48 @@
     }
   }
 
-  .SearchResult__heading {
+  .SearchResult__subheading {
     color: transparent;
-    background: #ddd;
+    background: transparent;
     border-radius: 12px;
   }
 
-  .SearchResult__org {
+  .SearchResult__orgName {
+    color: transparent;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      width: 88%;
+      height: 18px;
+      background: #aaa;
+      border-radius: 12px;
+    }
+  }
+
+  .PopOverLink__text {
+    color: transparent;
+    position: relative;
+    border-color: transparent;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      width: 88%;
+      height: 12px;
+      background: #ddd;
+      border-radius: 12px;
+    }
+  }
+
+  .SearchResult__org > p {
     color: transparent;
     position: relative;
 
@@ -100,5 +145,11 @@
 
   &__icon {
     animation: animateIconIn 300ms $bounce;
+  }
+}
+
+.SearchResult--notFound {
+  .SearchResult__icon {
+    background: #ddd;
   }
 }

@@ -20,9 +20,9 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    top: -245px;
-    left: -50%;
-    transform: translateX(25px);
+    left: 50%;
+    top: -12px;
+    transform: translateY(-100%) translateX(-50%);
     background: #fff;
     border-radius: 2px;
     padding: 15px;

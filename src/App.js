@@ -20,7 +20,7 @@ export default React.createClass({
       <div className="App">
         <MenuBar email={ email } />
         { this.props.children }
-        <Footer />
+        <Footer region="us" />
       </div>
     )
   }

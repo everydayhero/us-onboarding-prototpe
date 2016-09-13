@@ -71,7 +71,7 @@
   .hui-FormRow__label,
   .hui-FileInput,
   .RadioInput input {
-    transition: opacity 400ms ease-in;
+    transition: opacity 600ms ease-in;
   }
 
   .hui-FormRow__label > p:first-child {
@@ -79,10 +79,13 @@
   }
 }
 
+.hui-Checkbox {
+  margin-bottom: 0;
+}
 
 @keyframes loadingPulse {
   0% {
-    opacity: 0.33;
+    opacity: 0.5;
   }
   100% {
     opacity: 0.7;
@@ -94,7 +97,7 @@
   animation: fadeDownIn 600ms ease-out;
 
   .hui-Fieldset {
-    opacity: 0.75;
+    opacity: 0.7;
     animation: loadingPulse 800ms ease-in-out alternate infinite;
   }
 
@@ -102,8 +105,9 @@
     opacity: 0;
   }
 
-  .RadioInput {
-    input {
+  .RadioInput,
+  .hui-Checkbox {
+    input, a {
       opacity: 0;
     }
 

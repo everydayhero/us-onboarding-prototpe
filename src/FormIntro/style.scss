@@ -7,8 +7,11 @@
   line-height: 1.45;
 
   h1 {
-    font-size: 24px;
-    font-weight: 200;
+    font-family: "Amatic SC", "amatic", lato, helvetica, arial, sans-serif;
+    font-size: 64px;
+    font-weight: normal;
     color: $charcoal;
+    margin: 12px 0;
+    line-height: 1;
   }
 }
