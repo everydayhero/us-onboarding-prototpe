@@ -1,6 +1,6 @@
 # NFP US onboarding prototpe
 
-A simple prototype for the NFP onboarding process in the United States.
+A simple prototype for the NFP onboarding process in the United States. **View the prototype here:** https://everydayhero.github.io/us-onboarding-prototype/
 
 ---
 
