@@ -197,7 +197,10 @@ export default React.createClass({
             labelIsClickable={ false }
             label={ checkboxLabel }
             value={ this.state.termsCheckbox }
-            onChange={ this.handleTermsCheckbox } />
+            onChange={ this.handleTermsCheckbox }
+            errors={ (this.state.sendButtonClicked && !this.state.termsCheckbox && ['This field is required.']) || [] }
+            showError={ this.state.sendButtonClicked }
+            required />
         </FormRow>
       </Fieldset>
     )
