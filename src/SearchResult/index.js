@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import Icon from 'hero-ui/atoms/Icon'
-import PopOverLink from '../PopOverLink'
 import './style.scss'
 
 export default ({ complete, loading, notFound }) => {
@@ -32,12 +31,9 @@ export default ({ complete, loading, notFound }) => {
             <Icon icon={ notFound ? 'question' : 'check' } />
           </div>
           <div className="SearchResult__org">
-            <div className="SearchResult__orgName">Animal Foundation Pty. Ltd.</div>
-            <p>742 Evergreen Terrace, Springfield<br />
-            OREGON, United States, 81321</p>
-            <PopOverLink text="This doesn't look right?">
-              <p>What do we write here?</p>
-            </PopOverLink>
+            <div className="SearchResult__orgName">Concern Foundation</div>
+            <p>11111 West Olympic Boulevard, Suite 214<br />
+            Los Angeles, CALIFORNIA, United States, 81321</p>
           </div>
         </div> }
       </div>

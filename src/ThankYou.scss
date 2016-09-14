@@ -5,11 +5,12 @@
   background: $cream;
 
   &__content {
-    max-width: 610px;
+    max-width: 670px;
     line-height: 28px;
     padding: 0 0 100px;
     margin: 0 auto;
     text-align: center;
+    font-size: 15px;
 
     img {
       margin-bottom: 20px;
@@ -27,5 +28,10 @@
   &__subtitle {
     font-size: 20px;
     margin-bottom: 20px;
+  }
+
+  &__team {
+    color: $smoke;
+    font-style: italic;
   }
 }

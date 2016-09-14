@@ -38,4 +38,8 @@
       }
     }
   }
+
+  &__signedIn {
+    display: none; // hidden for user testing
+  }
 }

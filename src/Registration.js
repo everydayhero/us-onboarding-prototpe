@@ -39,14 +39,17 @@ export default React.createClass({
       einConfirmed: false,
       ein: '',
       einErrors: [],
-      displayName: 'Animal Foundation Pty. Ltd.',
+      displayName: 'Concern Foundation',
+      fullName: '',
+      emailAddress: '',
       contactNumber: '',
       routingNumber: '',
       accountNumber: '',
       imageName: '',
       subscription: 'STARTER (FREE)',
       payment: 'Wire Transfer (ACH) or Check',
-      termsCheckbox: false
+      termsCheckbox: false,
+      sendButtonClicked: false
     }
   },
 
@@ -104,7 +107,24 @@ export default React.createClass({
   },
 
   simulateSendForm() {
-    hashHistory.push(`/thankyou?email=${this.props.location.query.email}`)
+    this.setState({ sendButtonClicked: true })
+
+    const {
+      complete,
+      ein,
+      displayName,
+      contactNumber,
+      routingNumber,
+      accountNumber,
+      imageName,
+      termsCheckbox
+    } = this.state
+
+    const formCompleted = complete && ein && displayName && contactNumber && routingNumber && accountNumber && imageName && termsCheckbox
+
+    if (formCompleted) {
+      hashHistory.push(`/thankyou?email=${this.props.location.query.email}`)
+    }
   },
 
   simulateUploaded() {
@@ -183,29 +203,6 @@ export default React.createClass({
     )
   },
 
-  renderSendButton() {
-    const {
-      complete,
-      ein,
-      displayName,
-      contactNumber,
-      routingNumber,
-      accountNumber,
-      imageName,
-      termsCheckbox
-    } = this.state
-
-    const enabled = complete && ein && displayName && contactNumber && routingNumber && accountNumber && imageName && termsCheckbox
-
-    return (
-      <Button
-        label="Send Application"
-        kind="cta"
-        onClick={ this.simulateSendForm }
-        disabled={ !enabled } />
-    )
-  },
-
   renderFullForm() {
     const {
       loading,
@@ -250,19 +247,6 @@ export default React.createClass({
           </FormRow>
         </Fieldset>
 
-        <Fieldset legend="Your Contact Number">
-          <FormRow tip="This phone number is used by everydayhero staff to contact you should we need any further details during the application process or in the event of any billing or legal matters.">
-            <TextInput
-              layout="half"
-              label="Your Contact Number"
-              hint="Ideally this should be your direct contact number, rather than a general number for you organization."
-              onChange={ (text) => this.handleInputChange('contactNumber', text) }
-              value={ this.state.contactNumber }
-              errorMessage="This field is required."
-              required />
-          </FormRow>
-        </Fieldset>
-
         { this.state.notFound && <Fieldset legend="Organization Address">
           <FormRow tip="We verify that this is your organization's address as registered with the IRS.">
             <AddressLookup
@@ -280,28 +264,28 @@ export default React.createClass({
         </Fieldset> }
 
         { !this.state.samePostal && <Fieldset legend="Postal Address">
-          <FormRow tip="We use this address only if we need to send your organization physical financial or legal documents relating to your account at everydayhero.">
+          <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup countryCode="us" />
           </FormRow>
         </Fieldset> }
 
         { !this.state.notFound && <Fieldset legend="Postal Address">
-          <FormRow tip="We use this address only if we need to send your organization physical financial or legal documents relating to your account at everydayhero.">
+          <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
-                street_address: '742 Evergreen Terrace',
+                street_address: '11111 West Olympic Boulevard, Suite 214',
                 extended_address: '',
-                locality: 'Springfield',
-                region: 'Oregon',
+                locality: 'Los Angeles',
+                region: 'California',
                 country_name: 'United States',
-                postal_code: '10259'
+                postal_code: '90064'
               }}
               required />
           </FormRow>
         </Fieldset> }
 
-        <Fieldset legend="Bank Account Details">
-          <FormRow tip="We use these bank account details to release donations to your nonprofit. Funds are released via bank-to-bank transfer, once a week.">
+        <Fieldset legend="Deposit Bank Account Details">
+          <FormRow tip="We use these bank account details only to deposit donations to your nonprofit. Funds are deposited via bank-to-bank transfer, once a week.">
           <TextInput
             layout="half"
             label="Routing Number"
@@ -309,6 +293,7 @@ export default React.createClass({
             onChange={ (text) => this.handleInputChange('routingNumber', text) }
             value={ this.state.routingNumber }
             errorMessage="A routing number is required before donations can be released to your account."
+            showError={ this.state.sendButtonClicked }
             required />
           </FormRow>
           <FormRow>
@@ -318,6 +303,7 @@ export default React.createClass({
               onChange={ (text) => this.handleInputChange('accountNumber', text) }
               value={ this.state.accountNumber }
               errorMessage="A bank account number is required before donations can be released to your account."
+              showError={ this.state.sendButtonClicked }
               required />
             <div className="hui-FormRow__tip">
               <label className="hui-FormRow__label">
@@ -343,7 +329,10 @@ export default React.createClass({
               label="Voided Check Upload"
               onChange={ this.simulateUploaded }
               value={{ filename: this.state.imageName }}
-              layout="half" />
+              layout="half"
+              required={ true }
+              showError={ this.state.sendButtonClicked }
+              errors={ this.state.sendButtonClicked && !this.state.imageName && ['This field is required.'] } />
 
             <div className="hui-FormRow__tip">
               <label className="hui-FormRow__label">
@@ -386,30 +375,73 @@ export default React.createClass({
 
         { this.state.subscription === 'PRO ($99/mo)' && this.renderPaymentSection() }
         { this.renderTermsCheckbox() }
-        { this.renderSendButton() }
+
+        <Button
+          label="Send Application"
+          kind="cta"
+          onClick={ this.simulateSendForm } />
       </form>
     )
   },
 
   render() {
+    console.log(this.state.sendButtonClicked)
+
     return (
       <section className="mainFormSection">
         <div>
           <FormIntro />
 
           <form onSubmit={ (e) => this.handleEINSearch(e) }>
+          <Fieldset legend="Your Information">
+            <FormRow>
+              <TextInput
+                layout="half"
+                label="Your Full Name"
+                hint="Providing your full name helps speed up the verification process."
+                onChange={ (text) => this.handleInputChange('fullName', text) }
+                value={ this.state.fullName }
+                errorMessage="This field is required."
+                showError={ this.state.sendButtonClicked }
+                required />
+            </FormRow>
+
+            <FormRow tip="We will contact you via this email address if we need any additional information regarding your application.">
+              <TextInput
+                layout="half"
+                label="Your Email Address"
+                onChange={ (text) => this.handleInputChange('emailAddress', text) }
+                value={ this.state.emailAddress }
+                errorMessage="This field is required."
+                showError={ this.state.sendButtonClicked }
+                required />
+            </FormRow>
+
+            <FormRow tip="In instances where we can't reach you via email we will use your contact number.">
+              <TextInput
+                layout="half"
+                label="Your Contact Number"
+                hint="Ideally this should be your direct contact number, rather than a general number for you organization."
+                onChange={ (text) => this.handleInputChange('contactNumber', text) }
+                value={ this.state.contactNumber }
+                errorMessage="This field is required."
+                showError={ this.state.sendButtonClicked }
+                required />
+            </FormRow>
+          </Fieldset>
+
             <Fieldset legend="Employer Identification Number (EIN)">
               <FormRow tip="Enter the Employee Identification Number (EIN) for your organization to automatically indentify your your nonprofit.">
                 { this.state.loading && <Icon className="LoadingIcon" icon="refresh" spin /> }
                 <SearchInput
                   layout="half"
                   label="EIN"
-                  autoFocus={ true }
                   hint="Hint: A valid EIN is nine digits long, for example 123456789"
                   onChange={ (text) => this.handleEINChange(text) }
                   onBlur={ (text) => this.handleEINBlur(text) }
                   value={ this.state.ein }
                   errors={ this.state.einErrors }
+                  showError={ this.state.sendButtonClicked }
                   disabled={ this.state.loading }
                   required />
               </FormRow>
