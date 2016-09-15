@@ -169,7 +169,7 @@ export default React.createClass({
               },
               {
                 value: 'Monthly Direct Debit',
-                tip: 'Invoiced monthly at a total of $99.00'
+                tip: 'Invoiced monthly at a total of $99.00 (12 Month Contract)'
               }
             ]}
             name="invoice"
@@ -358,7 +358,7 @@ export default React.createClass({
                   tip: 'Detailed donor and fundraiser reports, an everydayhero charity profile, donor cover, The Raiser’s Edge integration and more...'
                 },
                 {
-                  value: 'PRO ($99/mo)',
+                  value: 'PRO ($99/mo – 12 Month Contract)',
                   tip: 'Create branded single chartity events, branded campaign landing-pages and access a dedicated account manager.'
                 }
               ]}
@@ -376,7 +376,7 @@ export default React.createClass({
           </FormRow>
         </Fieldset>
 
-        { this.state.subscription === 'PRO ($99/mo)' && this.renderPaymentSection() }
+        { this.state.subscription === 'PRO ($99/mo – 12 Month Contract)' && this.renderPaymentSection() }
         { this.renderTermsCheckbox() }
 
         <Button
