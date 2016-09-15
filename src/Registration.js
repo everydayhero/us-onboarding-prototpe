@@ -35,14 +35,14 @@ export default React.createClass({
       complete: false,
       orgName: '',
       notFound: false,
-      samePostal: true,
+      sameMailing: true,
       einConfirmed: false,
       ein: '',
       einErrors: [],
       displayName: 'Concern Foundation',
       fullName: '',
       emailAddress: '',
-      contactNumber: '',
+      phoneNumber: '',
       routingNumber: '',
       accountNumber: '',
       imageName: '',
@@ -113,14 +113,14 @@ export default React.createClass({
       complete,
       ein,
       displayName,
-      contactNumber,
+      phoneNumber,
       routingNumber,
       accountNumber,
       imageName,
       termsCheckbox
     } = this.state
 
-    const formCompleted = complete && ein && displayName && contactNumber && routingNumber && accountNumber && imageName && termsCheckbox
+    const formCompleted = complete && ein && displayName && phoneNumber && routingNumber && accountNumber && imageName && termsCheckbox
 
     if (formCompleted) {
       hashHistory.push(`/thankyou?email=${this.props.location.query.email}`)
@@ -145,8 +145,8 @@ export default React.createClass({
     })
   },
 
-  handleSamePostalCheckbox() {
-    this.setState({ samePostal: !this.state.samePostal })
+  handleSameMailingCheckbox() {
+    this.setState({ sameMailing: !this.state.sameMailing })
   },
 
   handleTermsCheckbox() {
@@ -178,7 +178,7 @@ export default React.createClass({
 
           <div className="hui-FormRow__tip">
             <label className="hui-FormRow__label">
-              <p>Upon sending your application you will recieve your first invoice via email. Pay using the preffered method for your organization.</p>
+              <p>Upon sending your application you will receive your first invoice via email. Pay using the preffered method for your organization.</p>
             </label>
           </div>
         </FormRow>
@@ -260,19 +260,19 @@ export default React.createClass({
           <FormRow>
             <Checkbox
               labelIsClickable={ false }
-              label="This is also the postal address for my organization"
-              value={ this.state.samePostal }
-              onChange={ this.handleSamePostalCheckbox } />
+              label="This is also the mailing address for my organization"
+              value={ this.state.sameMailing }
+              onChange={ this.handleSameMailingCheckbox } />
           </FormRow>
         </Fieldset> }
 
-        { !this.state.samePostal && <Fieldset legend="Postal Address">
+        { !this.state.sameMailing && <Fieldset legend="Mailing Address">
           <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup countryCode="us" />
           </FormRow>
         </Fieldset> }
 
-        { !this.state.notFound && <Fieldset legend="Postal Address">
+        { !this.state.notFound && <Fieldset legend="Mailing Address">
           <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
@@ -420,13 +420,13 @@ export default React.createClass({
                 required />
             </FormRow>
 
-            <FormRow tip="In instances where we can't reach you via email we will use your contact number.">
+            <FormRow tip="In instances where we can't reach you via email we will use your phone number.">
               <TextInput
                 layout="half"
-                label="Your Contact Number"
-                hint="Ideally this should be your direct contact number, rather than a general number for you organization."
-                onChange={ (text) => this.handleInputChange('contactNumber', text) }
-                value={ this.state.contactNumber }
+                label="Your Phone Number"
+                hint="Ideally this should be your direct phone number, rather than a general number for you organization."
+                onChange={ (text) => this.handleInputChange('phoneNumber', text) }
+                value={ this.state.phoneNumber }
                 errorMessage="This field is required."
                 showError={ this.state.sendButtonClicked }
                 required />
