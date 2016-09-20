@@ -32,8 +32,8 @@ export default ({ complete, loading, notFound }) => {
           </div>
           <div className="SearchResult__org">
             <div className="SearchResult__orgName">Concern Foundation</div>
-            <p>11111 West Olympic Boulevard, Suite 214<br />
-            Los Angeles, CALIFORNIA, United States, 81321</p>
+            <p>6701 Center Dr W<br />
+            Los Angeles, CALIFORNIA, United States, 90045</p>
           </div>
         </div> }
       </div>
