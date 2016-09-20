@@ -39,7 +39,7 @@ export default React.createClass({
       einConfirmed: false,
       ein: '',
       einErrors: [],
-      displayName: 'Concern Foundation',
+      displayName: 'P.S. ARTS',
       fullName: '',
       emailAddress: '',
       phoneNumber: '',
@@ -187,7 +187,7 @@ export default React.createClass({
   },
 
   renderTermsCheckbox() {
-    const checkboxLabel = <span>I accept the everydayhero <a href="#">online fundraising agreement</a></span>
+    const checkboxLabel = <span>I accept the everydayhero <a href="#">terms &amp; conditions</a></span>
 
     return (
       <Fieldset>
@@ -276,12 +276,12 @@ export default React.createClass({
           <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
-                street_address: '11111 West Olympic Boulevard, Suite 214',
+                street_address: '6701 Center Dr W',
                 extended_address: '',
                 locality: 'Los Angeles',
                 region: 'California',
                 country_name: 'United States',
-                postal_code: '90064'
+                postal_code: '90045'
               }}
               required />
           </FormRow>
