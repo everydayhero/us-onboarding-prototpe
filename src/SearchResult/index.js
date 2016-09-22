@@ -31,9 +31,11 @@ export default ({ complete, loading, notFound }) => {
             <Icon icon={ notFound ? 'question' : 'check' } />
           </div>
           <div className="SearchResult__org">
-            <div className="SearchResult__orgName">Concern Foundation</div>
-            <p>6701 Center Dr W<br />
-            Los Angeles, CALIFORNIA, United States, 90045</p>
+            <div className="SearchResult__orgName">
+              Second Harvest Foodbank of Southern Wisconsin
+            </div>
+            <p>2802 Dairy Dr<br />
+            Madison, Wisconsin, 53718, United States</p>
           </div>
         </div> }
       </div>

@@ -39,7 +39,7 @@ export default React.createClass({
       einConfirmed: false,
       ein: '',
       einErrors: [],
-      displayName: 'P.S. ARTS',
+      displayName: 'Second Harvest Foodbank of Southern Wisconsin',
       fullName: '',
       emailAddress: '',
       phoneNumber: '',
@@ -276,12 +276,12 @@ export default React.createClass({
           <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
-                street_address: '6701 Center Dr W',
+                street_address: '2802 Dairy Dr',
                 extended_address: '',
-                locality: 'Los Angeles',
-                region: 'California',
+                locality: 'Madison',
+                region: 'Wisconsin',
                 country_name: 'United States',
-                postal_code: '90045'
+                postal_code: '53718'
               }}
               required />
           </FormRow>
