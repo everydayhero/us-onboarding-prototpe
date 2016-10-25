@@ -161,15 +161,15 @@ export default React.createClass({
             labels={[
               {
                 value: 'Wire Transfer (ACH) or Check',
-                tip: 'Invoiced annually at a total of $1,188.00'
+                tip: 'Invoiced annually'
               },
               {
                 value: 'Annual Direct Debit',
-                tip: 'Invoiced annually at a total of $1,188.00'
+                tip: 'Invoiced annually'
               },
               {
                 value: 'Monthly Direct Debit',
-                tip: 'Invoiced monthly at a total of $99.00 (12 Month Contract)'
+                tip: 'Invoiced monthly'
               }
             ]}
             name="invoice"
@@ -178,7 +178,7 @@ export default React.createClass({
 
           <div className="hui-FormRow__tip">
             <label className="hui-FormRow__label">
-              <p>Upon sending your application you will receive your first invoice via email. Pay using the preffered method for your organization.</p>
+              <p>Upon sending your application, you will receive an official contract outlining your contract terms and contract length as well as your first invoice via email.</p>
             </label>
           </div>
         </FormRow>
@@ -358,7 +358,7 @@ export default React.createClass({
                   tip: 'Detailed donor and fundraiser reports, an everydayhero charity profile, donor cover, The Raiser’s Edge integration and more...'
                 },
                 {
-                  value: 'PRO ($99/mo – 12 Month Contract)',
+                  value: 'PRO',
                   tip: 'Create branded single chartity events, branded campaign landing-pages and access a dedicated account manager.'
                 }
               ]}
@@ -376,7 +376,7 @@ export default React.createClass({
           </FormRow>
         </Fieldset>
 
-        { this.state.subscription === 'PRO ($99/mo – 12 Month Contract)' && this.renderPaymentSection() }
+        { this.state.subscription === 'PRO' && this.renderPaymentSection() }
         { this.renderTermsCheckbox() }
 
         <Button
@@ -388,8 +388,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state.sendButtonClicked)
-
     return (
       <section className="mainFormSection">
         <div>
