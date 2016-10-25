@@ -25,3 +25,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
+
+
+### `./deploy`
+
+```sh
+$ npm run  build
+$ ./deploy
+```
+
+Generate a fresh build and deploy it it the `gh-pages` branch.
