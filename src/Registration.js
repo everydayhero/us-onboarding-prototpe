@@ -47,7 +47,7 @@ export default React.createClass({
       accountNumber: '',
       imageName: '',
       subscription: 'STARTER (FREE)',
-      payment: 'Wire Transfer (ACH) or Check',
+      payment: 'Wire Transfer or Check',
       termsCheckbox: false,
       sendButtonClicked: false
     }
@@ -160,7 +160,7 @@ export default React.createClass({
           <RadioGroup
             labels={[
               {
-                value: 'Wire Transfer (ACH) or Check',
+                value: 'Wire Transfer or Check',
                 tip: 'Invoiced annually'
               },
               {
