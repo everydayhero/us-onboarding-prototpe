@@ -30,7 +30,7 @@ Your app is ready to be deployed!
 ### `./deploy`
 
 ```sh
-$ npm run  build
+$ npm run build
 $ ./deploy
 ```
 
