@@ -39,7 +39,7 @@ export default React.createClass({
       einConfirmed: false,
       ein: '',
       einErrors: [],
-      displayName: 'Second Harvest Foodbank of Southern Wisconsin',
+      displayName: 'Honorable Tina Brozman Foundation Inc',
       fullName: '',
       emailAddress: '',
       phoneNumber: '',
@@ -276,12 +276,12 @@ export default React.createClass({
           <FormRow tip="We use this address only if we need to send your organization financial or legal documents relating to your account at everydayhero.">
             <AddressLookup
               prefill={{
-                street_address: '2802 Dairy Dr',
+                street_address: '1 Federal Street',
                 extended_address: '',
-                locality: 'Madison',
-                region: 'Wisconsin',
+                locality: 'Boston',
+                region: 'Massachusetts',
                 country_name: 'United States',
-                postal_code: '53718'
+                postal_code: '02110'
               }}
               required />
           </FormRow>

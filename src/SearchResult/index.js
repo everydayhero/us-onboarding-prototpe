@@ -32,10 +32,10 @@ export default ({ complete, loading, notFound }) => {
           </div>
           <div className="SearchResult__org">
             <div className="SearchResult__orgName">
-              Second Harvest Foodbank of Southern Wisconsin
+              Honorable Tina Brozman Foundation Inc
             </div>
-            <p>2802 Dairy Dr<br />
-            Madison, Wisconsin, 53718, United States</p>
+            <p>1 Federal Street<br />
+            Boston, Massachusetts, 02110, United States</p>
           </div>
         </div> }
       </div>
